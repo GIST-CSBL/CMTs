@@ -32,4 +32,4 @@ To find the most optimal combination of biomarker candidates, various classifica
 In this study, we applied logistic regression, linear discriminant anlaysis for linear classification and random forest, support vector machine for nonlinear classification.
 
 ### 5. CMTs_plots.R
-Finally, we visualized the patterns of metabolites from healthy control to benign and malignant states. \
+Finally, we visualized the patterns of metabolites from healthy control to benign and malignant states. 
