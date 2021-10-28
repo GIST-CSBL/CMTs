@@ -11,7 +11,7 @@ The toy examples(.csv) for the codes are contained in Datasets folder.
 
 ### Missing value imputation using MetImp
 Missing values in the raw metabolite profiling data should be imputed with proper methods. \
-In this study, the data was preprocessed using Quantile Regression Imputation of Left-Censored data (QRILC) method. \
+In this study, the data were preprocessed using the Quantile Regression Imputation of Left-Censored data (QRILC) method. \
 We perform the imputation from https://metabolomics.cc.hawaii.edu/software/MetImp/ with minor modification of the code in the https://github.com/WandeRum/MVI-evaluation. 
 
 ### Prepare the preprocessed metabolite data 
