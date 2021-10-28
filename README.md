@@ -1,4 +1,4 @@
-# Biomarkers of canine mammary tumors in metabolomics data analysis
+# 1H NMR based urinary metabolites profiling dataset of canine mammary tumors 
 R scripts for the identification of urinary metabolic biomarker candidates in canine mammary tumors (CMTs) \
 R version: 3.6.3 \
 IDE: RStudio 
