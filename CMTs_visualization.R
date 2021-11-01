@@ -15,7 +15,7 @@ dataM$group<-gsub("3", "Normal", dataM$group)
 
 #Log2 transformation
 #For the PCA, data was transformed using log2 
-dataM[,2:56]<-log(dataM[,2:56]+1, base=2)
+dataM[,3:57]<-log(dataM[,3:57]+1, base=2)
 
 #PCA
 pca_dataM<-prcomp(dataM[,-c(1,2)], scale.=TRUE)
