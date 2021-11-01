@@ -7,7 +7,6 @@ IDE: RStudio
 Identifying efficient and sensitive biomarkers for non-invasive tests is one of the most important problems in cancer diagnosis. To deal with this problem, metabolomics is widely applied for biomarker research that detects abnormal changes in cancer patients. Canine mammary tumors exhibit physiological characteristics identical to those in human breast cancer and serve as a useful animal model to conduct breast cancer research. Here, we aimed to provide a reliable large-scale metabolite dataset collected from dogs with mammary tumors using proton nuclear magnetic resonance spectroscopy. We identified 55 metabolites in urine samples from 22 benign, 84 malignant, and 49 healthy control subjects. This dataset provides the potential biomarker candidates for mammary tumors in dogs and insights into cancer-specific metabolic alterations that share similar molecular characteristics.
 
 ## Workflow
-The toy examples(.csv) for the codes are contained in Datasets folder. 
 
 ### Missing value imputation using MetImp
 Missing values in the raw metabolite profiling data should be imputed with proper methods. \
