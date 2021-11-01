@@ -18,14 +18,10 @@ dataM$group<-gsub("3", "Normal", dataM$group)
 dataM[,2:56]<-log(dataM[,2:56]+1, base=2)
 
 #PCA
-pca_dataM<-prcomp(dataM[,-1], scale.=TRUE)
+pca_dataM<-prcomp(dataM[,-c(1,2)], scale.=TRUE)
 autoplot(pca_dataM)
-autoplot(pca_dataM, data=dataM, colour='group')
+autoplot(pca_dataM, data=dataM, colour='breeds', frame.type='norm', frame.colour="group", shape='group', frame.alpha=0.05)+
+  theme_bw()+
+  theme(legend.key = element_rect(fill = "white"))+
+  scale_shape_manual(values=c(17, 16, 8))
 
-#For the detail PCA plot, please use below code
-require(factoextra)
-fviz_eig(pca_dataM)
-fviz_pca_ind(pca_dataM,
-             col.ind=dataM$group,
-             addEllipses = TRUE,
-             repel=TRUE)
