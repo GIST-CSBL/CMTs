@@ -17,7 +17,6 @@ dataM$group<-gsub("3", "Normal", dataM$group)
 #If you need to exclude the outlier, please run the below code
 dataM_z<-dataM[,-c(1,2)]
 z_scores <- as.data.frame(sapply(dataM_z, function(dataM_z) (abs(dataM_z-mean(dataM_z))/sd(dataM_z))))
-yes_outliers<-z_scores[rowSums(z_scores>3),]
 rownames(z_scores)<-rownames(dataM_z)
 z_scores$counts<-rowSums(z_scores>3.29) #Outlier criteria: 3.29
 #dataM<-dataM[-c(x,y),] #x,y: the row number of outlier samples
