@@ -14,10 +14,15 @@ dataM$group<-gsub("1", "Benign", dataM$group)
 dataM$group<-gsub("2", "Malignant", dataM$group)
 dataM$group<-gsub("3", "Normal", dataM$group)
 
+#### Outlier detection ####
 #If you need to exclude the outlier, please run the below code
 #x,y: the row number of outlier samples
 #dataM<-dataM[-c(x,y),]
+dataM_z<-dataM[,-c(1,2)]
+z_scores <- as.data.frame(sapply(dataM_z, function(dataM_z) (abs(dataM_z-mean(dataM_z))/sd(dataM_z))))
+rownames(z_scores)<-rownames(dataM_z)
 
+#### PCA plot ####
 #Log2 transformation
 #For the PCA, data was transformed using log2 
 #Please ignore if you want to visualize the raw data
