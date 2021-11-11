@@ -1,9 +1,8 @@
-# Visualization of preprocessed metabolomics dataset using principal component analysis (PCA)
+# Outlier identification and visualization of preprocessed metabolomics dataset using z-score and principal component analysis (PCA), respectively
 # Input data should not have missing values for avoiding errors
 
 #Import packages
 require(ggplot2)
-require(ggfortify)
 require(factoextra)
 
 #Import data
@@ -16,11 +15,12 @@ dataM$group<-gsub("3", "Normal", dataM$group)
 
 #### Outlier detection ####
 #If you need to exclude the outlier, please run the below code
-#x,y: the row number of outlier samples
-#dataM<-dataM[-c(x,y),]
 dataM_z<-dataM[,-c(1,2)]
 z_scores <- as.data.frame(sapply(dataM_z, function(dataM_z) (abs(dataM_z-mean(dataM_z))/sd(dataM_z))))
+yes_outliers<-z_scores[rowSums(z_scores>3),]
 rownames(z_scores)<-rownames(dataM_z)
+z_scores$counts<-rowSums(z_scores>3.29) #Outlier criteria: 3.29
+#dataM<-dataM[-c(x,y),] #x,y: the row number of outlier samples
 
 #### PCA plot ####
 #Log2 transformation
