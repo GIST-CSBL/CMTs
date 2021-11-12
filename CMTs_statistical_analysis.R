@@ -44,7 +44,7 @@ fviz_pca_ind(pca_log_dataM,
              labelsize=3)
 
 #Export the plot for TIFF
-tiff("PLS-DA.tiff", units="mm", width=190, height=180, res=300)
+tiff("PCA.tiff", units="mm", width=190, height=180, res=300)
 fviz_pca_ind(pca_log_dataM,
              col.ind=log_dataM$breeds,
              addEllipses = FALSE,
