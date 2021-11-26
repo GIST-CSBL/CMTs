@@ -4,6 +4,8 @@
 #Import packages
 require(ggplot2)
 require(factoextra)
+require(dendextend)
+library(colorspace)
 
 #Import data
 #dataM: Preprocessed metabolite dataset. All values in this file were imputed using proper method.
@@ -12,14 +14,6 @@ dataM<-read.csv("/CMTs_DataMatrix.csv", header=TRUE, row.names=1)
 dataM$group<-gsub("1", "Benign", dataM$group)
 dataM$group<-gsub("2", "Malignant", dataM$group)
 dataM$group<-gsub("3", "Normal", dataM$group)
-
-#### Outlier detection ####
-#If you need to exclude the outlier, please run the below code
-dataM_z<-dataM[,-c(1,2)]
-z_scores <- as.data.frame(sapply(dataM_z, function(dataM_z) (abs(dataM_z-mean(dataM_z))/sd(dataM_z))))
-rownames(z_scores)<-rownames(dataM_z)
-z_scores$counts<-rowSums(z_scores>3.29) #Outlier criteria: 3.29
-#dataM<-dataM[-c(x,y),] #x,y: the row number of outlier samples
 
 #### PCA plot ####
 #Log2 transformation
@@ -50,4 +44,26 @@ fviz_pca_ind(pca_log_dataM,
              addEllipses = FALSE,
              repel=TRUE,
              labelsize=3)
+dev.off()
+
+#### Dendrogram ####
+hc<-hclust(dist(log_dataM[,-c(1,2)]), method="average")
+dend<-as.dendrogram(hc)
+
+labels_colors(dend)<-
+  rainbow_hcl(3)[
+    as.numeric(log_cmts[,1])[order.dendrogram(dend)]]
+
+dend<-set(dend, "labels_cex", 0.7)
+plot(dend,
+     main="Clustered CMTs data set",
+     horiz=FALSE, nodePar=list(cex=.05))
+legend("topright", inset=.07, legend=c("Benign", "Malignant", "Normal"), fill=rainbow_hcl(3))
+
+tiff("Hierarchical_300_groups.tiff", units="mm", width=380, height=180, res=300) #1-column: 90mm, 2-column:190mm
+plot(dend,
+     main="Clustered CMTs data set",
+     horiz=FALSE, nodePar=list(cex=.05))
+legend("topright", inset=.07, legend=c("Benign", "Malignant", "Normal"), fill=rainbow_hcl(3))
+
 dev.off()
