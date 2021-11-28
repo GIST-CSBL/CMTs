@@ -17,5 +17,8 @@ We perform the imputation from https://metabolomics.cc.hawaii.edu/software/MetIm
 If you use your own metabolite data, you should get a copmlete dataset that imputed and filtered the metabolites.
 In this case, metabolites that has the missing value over 20% and mismatched with KEGG ID are excluded from the following analysis.
 
-### CMTs_statistical_analysis.R
-To identify outliers and visualize the samples' distribution and check the outliers according to the factors, we used z-score and principal component analysis (PCA).
+### CMTs_Dendrogram.R
+To identify outliers, we used hierarchical clustering. The group value should be numerical value for coloring by index.
+
+### CMTs_PCA.R
+To identify outliers and visualize the samples' distribution, we used principal component analysis (PCA). This code contains not only basic PCA but also coloring by breeds and age.
