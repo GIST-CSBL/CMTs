@@ -25,15 +25,30 @@ pca_dataM<-prcomp(dataM[,-c(1,2)], scale.=TRUE) #remove groups and breeds featur
 fviz_pca_ind(pca_dataM,
              col.ind=dataM$group,
              addEllipses = FALSE,
-             repel=TRUE)
+             repel=TRUE,
+            labelsize=3,
+            legend.title="Groups")
 
 #PCA for the log2 transformed data
-pca_log_dataM<-prcomp(log_dataM[,-c(1,2)], scale.=TRUE) #remove groups and breeds features
+#To eliminate the outlier samples, please rid out them using the index
+#Colored by breeds
+log_dataM_NoOutliers<-log_dataM[-c(2, 5),]
+pca_log_dataM<-prcomp(log_dataM_NoOutliers[,-c(1,2)], scale.=TRUE) #remove groups and breeds features
 fviz_pca_ind(pca_log_dataM,
              col.ind=log_dataM$breeds,
              addEllipses = FALSE,
              repel=TRUE,
-             labelsize=3)
+             labelsize=3,
+             legend.title="Breeds")
+
+#Colored by ages
+fviz_pca_ind(pca_age,
+             col.ind=log_cmts_age$age,
+             addEllipses = FALSE,
+             repel=TRUE,
+             labelsize=3,
+             gradient.cols=c("#97BDD6", "#7692B5", "black"),
+             legend.title="Age(month)")
 
 #Export the plot for TIFF
 tiff("PCA.tiff", units="mm", width=190, height=180, res=300) #draw PCA plot in 300dpi TIFF file with 190x180 (two-columns figure)
