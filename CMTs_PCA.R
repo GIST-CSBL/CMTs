@@ -4,8 +4,6 @@
 #Import packages
 require(ggplot2)
 require(factoextra)
-require(dendextend)
-library(colorspace)
 
 #Import data
 #dataM: Preprocessed metabolite dataset. All values in this file were imputed using proper method.
