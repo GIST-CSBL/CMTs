@@ -17,23 +17,24 @@ dataM$group<-gsub("3", "Normal", dataM$group)
 #For the PCA, data was transformed using log2 
 #Please ignore if you want to visualize the raw data
 log_dataM<-dataM
-log_dataM[,3:57]<-log(log_dataM[,3:57]+1, base=2)
+log_dataM[,4:58]<-log(log_dataM[,4:58]+1, base=2)
 
 #### PCA plot ####
 #PCA for the raw data
-pca_dataM<-prcomp(dataM[,-c(1,2)], scale.=TRUE) #remove groups and breeds features
+pca_dataM<-prcomp(dataM[,-c(1,3)], scale.=TRUE) #remove groups and breeds features
 fviz_pca_ind(pca_dataM,
              col.ind=dataM$group,
              addEllipses = FALSE,
              repel=TRUE,
-            labelsize=3,
-            legend.title="Groups")
+             labelsize=3,
+             legend.title="Groups")
 
 #PCA for the log2 transformed data
-#To eliminate the outlier samples, please rid out them using the index
-#Colored by breeds
+#To eliminate the outlier samples, please rid out them using the index (i.e., the number of rows)
 log_dataM_NoOutliers<-log_dataM[-c(2, 5),]
-pca_log_dataM<-prcomp(log_dataM_NoOutliers[,-c(1,2)], scale.=TRUE) #remove groups and breeds features
+pca_log_dataM<-prcomp(log_dataM_NoOutliers[,-c(1,3)], scale.=TRUE) #remove groups, breeds, and age features
+
+#Colored by breeds
 fviz_pca_ind(pca_log_dataM,
              col.ind=log_dataM$breeds,
              addEllipses = FALSE,
@@ -42,8 +43,8 @@ fviz_pca_ind(pca_log_dataM,
              legend.title="Breeds")
 
 #Colored by ages
-fviz_pca_ind(pca_age,
-             col.ind=log_cmts_age$age,
+fviz_pca_ind(pca_log_dataM,
+             col.ind=log_dataM$age,
              addEllipses = FALSE,
              repel=TRUE,
              labelsize=3,
@@ -51,6 +52,7 @@ fviz_pca_ind(pca_age,
              legend.title="Age(month)")
 
 #Export the plot for TIFF
+#For exporting the plot, please copy and paste the code "fviz_~" between tiff() and dev.off()
 tiff("PCA.tiff", units="mm", width=190, height=180, res=300) #draw PCA plot in 300dpi TIFF file with 190x180 (two-columns figure)
 fviz_pca_ind(pca_log_dataM,
              col.ind=log_dataM$breeds,
