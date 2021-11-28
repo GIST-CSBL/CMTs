@@ -1,4 +1,4 @@
-# Outlier identification and visualization of preprocessed metabolomics dataset using z-score and principal component analysis (PCA), respectively
+# Outlier identification and visualization of preprocessed metabolomics dataset using principal component analysis (PCA)
 # Input data should not have missing values for avoiding errors
 
 #Import packages
