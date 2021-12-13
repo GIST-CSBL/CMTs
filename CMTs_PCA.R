@@ -24,10 +24,15 @@ log_dataM[,4:58]<-log(log_dataM[,4:58]+1, base=2)
 pca_dataM<-prcomp(dataM[,-c(1,3)], scale.=TRUE) #remove groups and breeds features
 fviz_pca_ind(pca_dataM,
              col.ind=dataM$group,
-             addEllipses = FALSE,
-             repel=TRUE,
-             labelsize=3,
-             legend.title="Groups")
+             addEllipses = TRUE,
+             ellipse.level=0.95,
+             label="none",
+             pointsize=2,
+             legend.title="Groups")+
+  theme(legend.text=element_text(size=14),
+        legend.title=element_text(size=14),
+        axis.text=element_text(size=14),
+        text = element_text(size = 14))
 
 #PCA for the log2 transformed data
 #To eliminate the outlier samples, please rid out them using the index (i.e., the number of rows)
@@ -36,27 +41,40 @@ pca_log_dataM<-prcomp(log_dataM_NoOutliers[,-c(1,3)], scale.=TRUE) #remove group
 
 #Colored by breeds
 fviz_pca_ind(pca_log_dataM,
-             col.ind=log_dataM$breeds,
+             col.ind=log_dataM_NoOutliers$breeds,
              addEllipses = FALSE,
              repel=TRUE,
              labelsize=3,
-             legend.title="Breeds")
+             legend.title="Breeds")+
+  theme(legend.text=element_text(size=14),
+        legend.title=element_text(size=14),
+        axis.text=element_text(size=14),
+        text = element_text(size = 14))
 
 #Colored by ages
 fviz_pca_ind(pca_log_dataM,
-             col.ind=log_dataM$age,
+             col.ind=log_dataM_NoOutliers$age,
              addEllipses = FALSE,
              repel=TRUE,
              labelsize=3,
              gradient.cols=c("#97BDD6", "#7692B5", "black"),
-             legend.title="Age(month)")
+             legend.title="Age(month)")+
+  theme(legend.text=element_text(size=14),
+        legend.title=element_text(size=14),
+        axis.text=element_text(size=14),
+        text = element_text(size = 14))
 
 #Export the plot for TIFF
 #For exporting the plot, please copy and paste the code "fviz_~" between tiff() and dev.off()
 tiff("PCA.tiff", units="mm", width=190, height=180, res=300) #draw PCA plot in 300dpi TIFF file with 190x180 (two-columns figure)
 fviz_pca_ind(pca_log_dataM,
-             col.ind=log_dataM$breeds,
+             col.ind=log_dataM_NoOutliers$breeds,
              addEllipses = FALSE,
              repel=TRUE,
-             labelsize=3)
+             labelsize=3,
+             legend.title="Breeds")+
+  theme(legend.text=element_text(size=14),
+        legend.title=element_text(size=14),
+        axis.text=element_text(size=14),
+        text = element_text(size = 14))
 dev.off()
