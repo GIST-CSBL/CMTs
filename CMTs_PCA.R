@@ -28,6 +28,7 @@ fviz_pca_ind(pca_dataM,
              ellipse.level=0.95,
              label="none",
              pointsize=2,
+             ellipse.alpha=0,
              legend.title="Groups")+
   theme(legend.text=element_text(size=14),
         legend.title=element_text(size=14),
