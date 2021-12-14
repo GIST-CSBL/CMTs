@@ -24,11 +24,9 @@ log_dataM[,4:58]<-log(log_dataM[,4:58]+1, base=2)
 pca_dataM<-prcomp(dataM[,-c(1,3)], scale.=TRUE) #remove groups and breeds features
 fviz_pca_ind(pca_dataM,
              col.ind=dataM$group,
-             addEllipses = TRUE,
-             ellipse.level=0.95,
-             label="none",
-             pointsize=2,
-             ellipse.alpha=0,
+             addEllipses = FALSE,
+             repel=TRUE,
+             labelsize=5,
              legend.title="Groups")+
   theme(legend.text=element_text(size=14),
         legend.title=element_text(size=14),
@@ -40,12 +38,29 @@ fviz_pca_ind(pca_dataM,
 log_dataM_NoOutliers<-log_dataM[-c(2, 5),]
 pca_log_dataM<-prcomp(log_dataM_NoOutliers[,-c(1,3)], scale.=TRUE) #remove groups, breeds, and age features
 
+#Colored by groups
+fviz_pca_ind(pca_log_dataM,
+             col.ind=log_dataM_NoOutliers$group,
+             addEllipses = TRUE,
+             ellipse.level=0.95,
+             label="none",
+             pointsize=2,
+             mean.point=FALSE,
+             ellipse.alpha=0,
+             legend.title="Groups")+
+  theme(legend.text=element_text(size=14),
+        legend.title=element_text(size=14),
+        axis.text=element_text(size=14),
+        text = element_text(size = 14))
+
 #Colored by breeds
 fviz_pca_ind(pca_log_dataM,
              col.ind=log_dataM_NoOutliers$breeds,
              addEllipses = FALSE,
-             repel=TRUE,
-             labelsize=3,
+             ellipse.level=0.95,
+             label="none",
+             pointsize=3,
+             mean.point=FALSE,
              legend.title="Breeds")+
   theme(legend.text=element_text(size=14),
         legend.title=element_text(size=14),
@@ -56,8 +71,10 @@ fviz_pca_ind(pca_log_dataM,
 fviz_pca_ind(pca_log_dataM,
              col.ind=log_dataM_NoOutliers$age,
              addEllipses = FALSE,
-             repel=TRUE,
-             labelsize=3,
+             ellipse.level=0.95,
+             label="none",
+             pointsize=3,
+             mean.point=FALSE,
              gradient.cols=c("#97BDD6", "#7692B5", "black"),
              legend.title="Age(month)")+
   theme(legend.text=element_text(size=14),
