@@ -1,4 +1,4 @@
-# Dataset from urinary metabolite profiling of canine mammary tumors using 1H NMR
+# 1H NMR based urinary metabolites profiling dataset of canine mammary tumors 
 R scripts for the preprocessing of urinary metabolite profiling data from the canine mammary tumors (CMTs) \
 R version: 3.6.3 \
 IDE: RStudio 
