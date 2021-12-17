@@ -75,7 +75,7 @@ fviz_pca_ind(pca_log_dataM,
              label="none",
              pointsize=3,
              mean.point=FALSE,
-             gradient.cols=c("#97BDD6", "#7692B5", "black"),
+             gradient.cols=c("#ffe338", "#ff9960", "#df3928"),
              legend.title="Age(month)")+
   theme(legend.text=element_text(size=14),
         legend.title=element_text(size=14),
